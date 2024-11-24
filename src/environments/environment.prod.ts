@@ -1,4 +1,8 @@
 export const environment = {
     production: true,
-    apiUrl: undefined
+    apiUrl: "http://localhost:3000/api/phones",
+    apiEndpoints:{
+      list:'/',
+      filter:'/filter-numbers'
+    }
   };
