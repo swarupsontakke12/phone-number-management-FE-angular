@@ -1,0 +1,12 @@
+<h1 mat-dialog-title>{{data.title}}</h1>
+<div mat-dialog-content>
+  <p><strong>Phone Number:</strong> {{ data.key1 }}</p>
+  <p><strong>Message Count:</strong> {{ data.key2 }}</p>
+  <p><strong>Messages:</strong> {{ data.key4 }}</p>
+  <p><strong>Status:</strong> {{ data.key3  | capitalize}}</p>
+
+
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onClose()">Close</button>
+</div>

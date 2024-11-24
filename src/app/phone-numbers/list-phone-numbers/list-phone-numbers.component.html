@@ -1,0 +1,16 @@
+<mat-card class="content-card">
+  <mat-card-title class="card-title">List of Phone Numbers</mat-card-title>
+
+  <div *ngIf="isLoading" class="d-flex justify-content-center align-items-center loader-container">
+    <mat-spinner color="primary"></mat-spinner>
+  </div>
+
+  <div *ngIf="!isLoading">
+    <app-table [displayedColumns]="displayedColumns"
+    [data]="phoneData" (toggleChanged)="getActionData($event)"
+    (filterChanged)="getFilteredValue($event)"
+    [selectedStatus]="filterValue"
+    (viewActionClicked)="getPopupAction($event)"
+    ></app-table>
+  </div>
+</mat-card>

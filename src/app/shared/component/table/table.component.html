@@ -1,0 +1,83 @@
+<div class="table-container">
+  <!-- Filters and Search Section -->
+  <div *ngIf="data && data.length" class="d-flex justify-content-start align-items-center filters flex-wrap  ">
+    <!-- Search Field -->
+    <mat-form-field appearance="outline" class="search-bar">
+      <mat-label>Search</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Type to search" />
+    </mat-form-field>
+
+    <!-- Status Dropdown -->
+    <mat-form-field appearance="outline" class="filter-dropdown">
+      <mat-label>Status</mat-label>
+      <mat-select [(value)]="selectedStatus" (selectionChange)="applyStatusFilter($event)">
+        <mat-option value="all">All</mat-option>
+        <mat-option value="active">Active</mat-option>
+        <mat-option value="inactive">Inactive</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="table-wrapper" *ngIf="data && data.length; else noDataTemplate">
+    <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+      <!-- Serial Number -->
+
+      <ng-container matColumnDef="srNo">
+        <th class="fw-bold text-center" mat-header-cell *matHeaderCellDef mat-sort-header> Sr. No </th>
+        <td mat-cell *matCellDef="let element; let i = index"> {{i+1}} </td>
+      </ng-container>
+
+      <!-- Phone Number Column -->
+      <ng-container matColumnDef="number">
+        <th class="fw-bold text-center" mat-header-cell *matHeaderCellDef mat-sort-header> Phone Number </th>
+        <td mat-cell *matCellDef="let element"> {{element.number}} </td>
+      </ng-container>
+
+      <!-- Status Column -->
+      <ng-container matColumnDef="status">
+        <th class="fw-bold text-center" mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+        <td mat-cell *matCellDef="let element"> {{element.status | capitalize}} </td>
+      </ng-container>
+
+      <!-- messages Column -->
+      <ng-container matColumnDef="messages">
+        <th class="fw-bold " mat-header-cell *matHeaderCellDef> Messages </th>
+        <td mat-cell *matCellDef="let element"> {{element.messages}} </td>
+      </ng-container>
+
+      <!-- Message Count Column -->
+      <ng-container matColumnDef="messageCount">
+        <th class="fw-bold text-center" mat-header-cell *matHeaderCellDef mat-sort-header> Message Count </th>
+        <td mat-cell *matCellDef="let element"> {{element.messageCount}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="action">
+        <th class="fw-bold text-center" mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
+        <td class="action-btn-container" mat-cell *matCellDef="let element; let i = index;">
+
+          <mat-slide-toggle class="tp-margin" [checked]="element.status == 'active' ? true : false"
+            (toggleChange)="changeStatus( element , i)" [disabled]="false">
+          </mat-slide-toggle>
+
+          <button mat-icon-button class="view-btn" title="View" color="accent" (click)="viewDetails(element)">
+            <mat-icon>visibility</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+
+
+  <mat-paginator *ngIf="data && data.length" [length]="data.length" class="pagination-container"
+    [pageSizeOptions]="[5, 10, 20]"></mat-paginator>
+
+  <ng-template #noDataTemplate>
+    <div class="no-data-message">
+      <p>No data available</p>
+    </div>
+  </ng-template>
+</div>

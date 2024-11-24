@@ -1,0 +1,68 @@
+<mat-toolbar class="mat-elevation-z8">
+  <button mat-icon-button *ngIf="sidenav.mode === 'over'" (click)="sidenav.toggle()">
+    <mat-icon *ngIf="!sidenav.opened"> menu </mat-icon>
+    <mat-icon *ngIf="sidenav.opened"> close </mat-icon>
+  </button>
+  Phone Number Management
+  <span class="xxxx-menu-spacer"></span>
+
+  <span class="toolbar-item-spacer"></span>
+
+  <button mat-icon-button matTooltip="Like">
+    <mat-icon>favorite</mat-icon>
+  </button>
+
+  <button mat-icon-button matTooltip="My Account" [matMenuTriggerFor]="userAccountMenu">
+    <mat-icon>account_circle</mat-icon>
+  </button>
+  <mat-menu #userAccountMenu [overlapTrigger]="false" yPosition="below">
+    <button mat-menu-item routerLink="#">
+      <mat-icon>exit_to_app</mat-icon>Logout
+    </button>
+  </mat-menu>
+</mat-toolbar>
+<!-- Toolbar -->
+<mat-sidenav-container>
+  <!-- <app-sidebar></app-sidebar> -->
+  <mat-sidenav #sidenav="matSidenav" class="mat-elevation-z8">
+    <img class="avatar mat-elevation-z8" src="https://avatar.iran.liara.run/public/48" />
+
+    <h4 class="name">Swarup</h4>
+    <mat-divider></mat-divider>
+
+    <button mat-button class="menu-button"  routerLink="/phone-numbers-list"
+    routerLinkActive="active-link"
+    [routerLinkActiveOptions]="{ exact: true }">
+    <mat-icon>phone</mat-icon>
+    <span>Manage Numbers</span>
+    </button>
+
+    <button mat-button class="menu-button" routerLink="/dashboard"
+    [routerLinkActiveOptions]="{ exact: true }"
+    routerLinkActive="active-link">
+      <mat-icon>dashboard</mat-icon>
+      <span>Dashboard</span>
+    </button>
+
+    <button mat-button class="menu-button" routerLink="/about"
+    routerLinkActive="active-link"
+    [routerLinkActiveOptions]="{ exact: true }"
+    >
+      <mat-icon>info</mat-icon>
+      <span>About</span>
+    </button>
+
+    <mat-divider></mat-divider>
+
+    <button mat-button class="menu-button" routerLink="/logout">
+      <mat-icon>logout</mat-icon>
+      <span>Logout</span>
+    </button>
+
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div class="content mat-elevation-z8">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
