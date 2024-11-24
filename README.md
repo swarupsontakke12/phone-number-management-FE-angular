@@ -16,6 +16,7 @@ The reason for choosing Angular, Angular Material, and Bootstrap is that they he
 3. you can toggle and change the status
 4. you can view the phone details
 5. The application is responsive in mobile , tablet and desktop
+6. Added some of the extra tab like about & dashboard to make the user experience better.
 
 
    
